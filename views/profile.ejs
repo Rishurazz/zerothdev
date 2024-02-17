@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Profile</h1>
+    <h1><%= user.displayName || "No Display Name available" %></h1>
+    <h1><%= user.birthday || "No Birthday information available" %></h1>
+    <h1><%= user.relationshipStatus || "No Relationship Status available" %></h1>
+    <h1><%= user.isPerson || "IsPerson information not available" %></h1>
+    <h1><%= user.isPlusUser || "IsPlusUser information not available" %></h1>
+
+    <% if (user.placesLived && user.placesLived.length > 0) { %>
+        <!-- Iterate through placesLived array if available -->
+        <% user.placesLived.forEach(place => { %>
+            <h1><%= place.value || "No Place information available" %></h1>
+        <% }) %>
+    <% } else { %>
+        <h1>No places lived information available</h1>
+    <% } %>
+
+    <h1><%= user.language || "No Language information available" %></h1>
+
+    <% if (user.emails && user.emails.length > 0) { %>
+        <!-- Iterate through emails array if available -->
+        <% user.emails.forEach(email => { %>
+            <h1><%= email.value || "No Email information available" %></h1>
+        <% }) %>
+    <% } else { %>
+        <h1>No email information available</h1>
+    <% } %>
+
+    <h1><%= user.gender || "No Gender information available" %></h1>
+    <h1><%= user.picture || "No Picture information available" %></h1>
+
+    <% if (user.coverPhoto) { %>
+        <!-- Access properties of coverPhoto object if available -->
+        <h1><%= user.coverPhoto.url || "No Cover Photo URL available" %></h1>
+    <% } else { %>
+        <h1>No cover photo information available</h1>
+    <% } %>
+</body>
+</html>
