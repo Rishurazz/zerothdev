@@ -18,12 +18,15 @@ const userSchema = new mongoose.Schema({
   googleId: {
       type: String,
       required: true,
-      unique: true,
+      unique: true
   },
   displayName: {
       type: String,
-      required: true,
+      required: true
   },
+  email:{
+      type: String
+  }
   // Add other fields you want to save
   // Example: email, avatar, etc.
 });
