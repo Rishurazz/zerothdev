@@ -28,18 +28,20 @@ router.get('/register', function(req, res, next) {
 router.get('/profile', isLoggedIn, async function(req, res, next) {
   const googleuser = req.user;
   const user = await userModel.findById(req.session.passport.user._id);
-  console.log(user._id);
-  console.log(user.googleId);
-  console.log(user.displayName);
-  console.log(user.email);
-
   res.render('profile', { googleuser, user });
 });
 
 
-router.get('/learn', isLoggedIn, function(req, res, next) {
+router.get('/learn', isLoggedIn, async function(req, res, next) {
   const googleuser = req.user;
-  res.render('learn', {googleuser});
+  const user = await userModel.findById(req.session.passport.user._id);
+  res.render('learn', { googleuser, user });
+});
+
+router.get('/idea', isLoggedIn, async function(req, res, next) {
+  const googleuser = req.user;
+  const user = await userModel.findById(req.session.passport.user._id);
+  res.render('idea', {googleuser, user });
 });
 
 router.get('/auth/google',
@@ -70,7 +72,6 @@ router.get('/logout', (req, res, next) => {
 });
 
 function isLoggedIn(req, res, next) {
-  // req.user ?  next() : res.redirect("/");
   if (req.isAuthenticated()) {
     return next();
   }

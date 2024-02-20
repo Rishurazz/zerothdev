@@ -4,14 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Zerothdev</title>
+    <link rel="stylesheet" href="/stylesheets/home.css">
 </head>
 
 <body>
-    <h1>Home</h1>
-    <h1><%= googleuser.displayName %></h1>
-    <a href="/profile">Profile</a>
-    <a href="/learn">Learn</a>
+    <section id="background">
+        <div id="blob"></div>
+        <div id="blur"></div>
+    </section>
+
+    <div class="heading">
+        <h1>Zerothdev</h1>
+    </div>
+
+    <div class="profile">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="profile-icon" onclick="location.href='/profile'">
+            <path fill="currentColor"
+                d="M20 22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13Z">
+            </path>
+        </svg>
+
+        <div class="welcome">
+            <h1>Welcome, <%= googleuser.displayName %>!</h1>
+        </div>
+    </div>
+    
+    <div class="glowbtn">
+        <a href="/learn">Learn</a>
+        <a href="/idea">Idea</a>
+    </div>
 </body>
 
 </html>
