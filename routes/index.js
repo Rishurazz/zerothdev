@@ -2,28 +2,14 @@ var express = require('express');
 var router = express.Router();
 require('./auth');
 const passport = require('passport');
-const userModel = require('./users');
+const userModel = require('../models/users');
+const postModel = require('../models/post');
+const ideaModel = require('../models/idea');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
 });
-
-router.get('/register', function(req, res, next) {
-  res.render('register');
-});
-
-// router.get('/profile', isLoggedIn, async function(req, res, next) {
-//   const googleuser = req.user;
-//   const user = await userModel.findOne({googleId : req.session.passport.user});
-//   console.log(user);
-//   console.log(req.session.passport.user);
-//   console.log(user._id);
-//   console.log(user.googleId);
-//   console.log(user.displayName);
-//   console.log(user.email);
-//   res.render('profile', {googleuser, user});
-// });
 
 router.get('/profile', isLoggedIn, async function(req, res, next) {
   const googleuser = req.user;
@@ -41,7 +27,75 @@ router.get('/learn', isLoggedIn, async function(req, res, next) {
 router.get('/idea', isLoggedIn, async function(req, res, next) {
   const googleuser = req.user;
   const user = await userModel.findById(req.session.passport.user._id);
-  res.render('idea', {googleuser, user });
+  const allIdeas = await postModel.find().populate('user');
+  res.render('idea', {googleuser, user, ideas: allIdeas });
+});
+
+router.get('/feed', isLoggedIn, async function(req, res, next) {
+  const googleuser = req.user;
+  const user = await userModel.findById(req.session.passport.user._id);
+  const allPosts = await postModel.find().populate('user');
+  res.render('feed', {googleuser, user, posts: allPosts });
+});
+
+router.get('/createArticle', (req, res) => {
+  res.render('home'); // Assuming you have a template engine (like EJS) for rendering HTML
+});
+
+router.post('/createArticle', async (req, res) => {
+  try {
+      const { articleTitle, articleDescription } = req.body;
+
+      const user = await userModel.findById(req.session.passport.user._id);
+
+      const post = await postModel.create({
+          title: articleTitle,
+          description: articleDescription,
+          user: user._id, // Assuming user._id is the ID of the logged-in user
+      });
+
+      // Save the post to the database
+      user.posts.push(post._id);
+      await user.save();
+      await post.save();
+      console.log("post successful");
+
+      res.redirect('/auth/protected'); // Redirect to the home page or any other desired page after successful submission
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+router.get('/createIdea', (req, res) => {
+  res.render('home'); // Assuming you have a template engine (like EJS) for rendering HTML
+});
+
+router.post('/createIdea', async (req, res) => {
+  try {
+      const { articleTitle, articleDescription } = req.body;
+
+      const user = await userModel.findById(req.session.passport.user._id);
+
+      const newIdea = await ideaModel.create({
+          title: articleTitle,
+          description: articleDescription,
+          user: user._id, // Assuming user._id is the ID of the logged-in user
+      });
+
+      // Save the post to the database
+      user.ideas.push(newIdea._id);
+      await user.save();
+      await newIdea.save();
+      console.log("idea successful");
+
+      res.redirect('/auth/protected'); // Redirect to the home page or any other desired page after successful submission
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+  }
 });
 
 router.get('/auth/google',

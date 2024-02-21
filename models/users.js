@@ -1,14 +1,3 @@
-// var express = require('express');
-// var router = express.Router();
-
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-
-// module.exports = router;
-
-
 const mongoose = require("mongoose");
 const plm = require("passport-local-mongoose")
 
@@ -26,11 +15,23 @@ const userSchema = new mongoose.Schema({
   },
   email:{
       type: String
-  }
+  },
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post',
+    },
+  ],
+  ideas: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Idea',
+    },
+  ]
   // Add other fields you want to save
   // Example: email, avatar, etc.
 });
 
 userSchema.plugin(plm);
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

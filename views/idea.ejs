@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Idea</title>
+    <link rel='stylesheet' href='/stylesheets/idea.css' />
+  </head>
+  <body>
+    <section id="background">
+      <div id="blob"></div>
+      <div id="blur"></div>
+    </section>
+
+    <div class="heading">
+      <h1>Zerothdev</h1>
+    </div>
+
+    <% if (ideas.length > 0) { %>
+        <ul>
+            <% ideas.forEach(idea => { %>
+                <li>
+                    <p>Author: <%= idea.user.displayName %></p>
+                    <h4><%= idea.createdAt.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) %></h4>
+                    <h2><%= idea.title %></h2>
+                    <p><%= idea.description %></p>
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <h1>join</h1>
+    <h1>leave</h1>
+    <h1>group</h1>
+    
+</body>
+</html>

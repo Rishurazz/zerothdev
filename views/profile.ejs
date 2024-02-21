@@ -10,41 +10,5 @@
     <h1><%= user.googleId || "No Display googleId available" %></h1>
     <h1><%= user.displayName || "No Display Name available" %></h1>
     <h1><%= user.email || "No Display email available" %></h1>
-    <h1><%= googleuser.displayName || "No Display Name available" %></h1>
-    <h1><%= googleuser.emails && googleuser.emails.length > 0 ? user.emails[0].value : 'No email available' %></h1>
-    <h1><%= googleuser.birthday || "No Birthday information available" %></h1>
-    <h1><%= googleuser.relationshipStatus || "No Relationship Status available" %></h1>
-    <h1><%= googleuser.isPerson || "IsPerson information not available" %></h1>
-    <h1><%= googleuser.isPlusUser || "IsPlusUser information not available" %></h1>
-
-    <% if (googleuser.placesLived && googleuser.placesLived.length > 0) { %>
-        <!-- Iterate through placesLived array if available -->
-        <% googleuser.placesLived.forEach(place => { %>
-            <h1><%= place.value || "No Place information available" %></h1>
-        <% }) %>
-    <% } else { %>
-        <h1>No places lived information available</h1>
-    <% } %>
-
-    <h1><%= googleuser.language || "No Language information available" %></h1>
-
-    <% if (googleuser.emails && googleuser.emails.length > 0) { %>
-        <!-- Iterate through emails array if available -->
-        <% googleuser.emails.forEach(email => { %>
-            <h1><%= email.value || "No Email information available" %></h1>
-        <% }) %>
-    <% } else { %>
-        <h1>No email information available</h1>
-    <% } %>
-
-    <h1><%= googleuser.gender || "No Gender information available" %></h1>
-    <h1><%= googleuser.picture || "No Picture information available" %></h1>
-
-    <% if (googleuser.coverPhoto) { %>
-        <!-- Access properties of coverPhoto object if available -->
-        <h1><%= googleuser.coverPhoto.url || "No Cover Photo URL available" %></h1>
-    <% } else { %>
-        <h1>No cover photo information available</h1>
-    <% } %>
 </body>
 </html>

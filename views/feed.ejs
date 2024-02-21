@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Feed</title>
+    <link rel='stylesheet' href='/stylesheets/feed.css' />
+  </head>
+  <body>
+    <section id="background">
+      <div id="blob"></div>
+      <div id="blur"></div>
+    </section>
+
+    <div class="heading">
+      <h1>Zerothdev</h1>
+    </div>
+
+    <% if (posts.length > 0) { %>
+        <ul>
+            <% posts.forEach(post => { %>
+                <li>
+                    <p><%= post.user.displayName %></p>
+                    <h4><%= post.createdAt.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) %></h4>
+                    <h2><%= post.title %></h2> 
+                    <p><%= post.description %></p>
+                </li>
+            <% }) %>
+        </ul>
+        <% } %>
+    
+</body>
+</html>
