@@ -6,14 +6,6 @@
     --turquois: #15f0d1;
 }
 
-/* * { */
-/* margin: 0;
-  padding: 0;
-  box-sizing: border-box; */
-/* } */
-
-/* -- Background -- */
-
 body {
     width: 100%;
     height: 100%;
@@ -58,13 +50,38 @@ body {
     color: azure;
     justify-content: center;
     font-family: cursive;
+    /* background-color: #15f0d1; */
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.welcome {
+    /* padding-top: 20px; */
+    padding-left: 50px;
+    text-align: left;
+    color: rgb(246, 213, 161);
+    justify-content: center;
+    font-family: cursive;
+}
+
+.welcome h5{
+    margin-left: 50%;
+    color: #faebd7;
+}
+
+h2{
+    color: #faebd7;
+    text-align: center;
 }
 
 .MyCard {
     padding: 20px 30px;
-    margin-bottom: 20px;
+    margin-right: 20px;
     border-radius: 12px;
-    width: 400px;
+    width: 300px;
     color: rgb(237, 230, 222);
     background: rgba(48, 15, 10, 0.196);
     -webkit-backdrop-filter: blur(3px);
@@ -74,8 +91,13 @@ body {
 }
 
 .myIdea{
+    display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    /* display: flex; */
+.myArticle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

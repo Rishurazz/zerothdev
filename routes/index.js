@@ -13,8 +13,13 @@ router.get('/', function(req, res, next) {
 
 router.get('/profile', isLoggedIn, async function(req, res, next) {
   const googleuser = req.user;
-  const user = await userModel.findById(req.session.passport.user._id);
-  res.render('profile', { googleuser, user });
+  const user = await userModel.findById(req.session.passport.user._id).populate(["ideas", "posts"]);
+  console.log(user);
+  // const allIdeas = await postModel.findById(user.ideas).populate('user');
+  // console.log(allIdeas);
+  // const allPosts = await postModel.find().populate('user');
+  // console.log(allPosts);
+  res.render('profile', { googleuser, user});
 });
 
 
