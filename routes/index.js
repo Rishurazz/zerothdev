@@ -32,7 +32,7 @@ router.get('/learn', isLoggedIn, async function(req, res, next) {
 router.get('/idea', isLoggedIn, async function(req, res, next) {
   const googleuser = req.user;
   const user = await userModel.findById(req.session.passport.user._id);
-  const allIdeas = await postModel.find().populate('user');
+  const allIdeas = await ideaModel.find().populate('user');
   res.render('idea', {googleuser, user, ideas: allIdeas });
 });
 
@@ -42,6 +42,33 @@ router.get('/feed', isLoggedIn, async function(req, res, next) {
   const allPosts = await postModel.find().populate('user');
   res.render('feed', {googleuser, user, posts: allPosts });
 });
+
+router.get('/group', isLoggedIn, isMember, async function(req, res, next) {
+  res.render('group');
+});
+
+router.post('/join', async (req, res) => {
+  try{
+    const idea = await ideaModel.findById(req.body.ideaId);
+
+    const user = await userModel.findById(req.session.passport.user._id);
+    console.log("User in join route: ", idea._id);
+    
+    user.ideasJoined.push(idea._id);
+    idea.members.push(user._id);
+    
+    console.log("User in update route: ", user);
+    await user.save();
+    await idea.save();
+
+    res.redirect('/group');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 
 router.get('/createArticle', (req, res) => {
   res.render('home'); // Assuming you have a template engine (like EJS) for rendering HTML
@@ -135,6 +162,10 @@ function isLoggedIn(req, res, next) {
     return next();
   }
   res.redirect("/");
+}
+
+function isMember(req,res,next){
+  console.log("isMember");
 }
 
 module.exports = router;

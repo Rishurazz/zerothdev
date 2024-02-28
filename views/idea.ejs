@@ -14,18 +14,24 @@
       <h1>Zerothdev</h1>
     </div>
 
-    <% if (ideas.length > 0) { %>
-        <ul>
-            <% ideas.forEach(idea => { %>
-                <li>
-                    <p>Author: <%= idea.user.displayName %></p>
-                    <h4><%= idea.createdAt.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) %></h4>
-                    <h2><%= idea.title %></h2>
-                    <p><%= idea.description %></p>
-                </li>
-            <% }) %>
-        </ul>
-    <% } %>
+    <div class="myIdea">
+        <% if (ideas.length > 0) { %>
+                <% ideas.forEach(idea => { %>
+                    <div class="MyCard">
+                        <h3>Author: <%= idea.user.displayName %></h3>
+                        <h6><%= idea.createdAt.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }) %></h6>
+                        <h3><%= idea.title %></h3>
+                        <p><%= idea.description %></p>
+                        <form action="/join" method="post">
+                            <input type="hidden" id="ideaId" name="ideaId" value=<%= idea._id %>>
+                            <div class="glowbtn">
+                                <button type="submit">Join Idea!</button>
+                            </div>
+                        </form>
+                    </div>
+                <% }) %>
+        <% } %>
+    </div>
 
     <h1>join</h1>
     <h1>leave</h1>

@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Idea',
     },
+  ],
+  ideasJoined: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post',
+    },
   ]
   // Add other fields you want to save
   // Example: email, avatar, etc.

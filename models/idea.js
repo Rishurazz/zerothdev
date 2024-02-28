@@ -17,10 +17,10 @@ const ideaSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    likes: {
-        type: Number,
-        default: 0,
-    },
+    members: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Assuming you have a User model for group members
+    }],
 });
 
 module.exports = mongoose.model('Idea', ideaSchema);
