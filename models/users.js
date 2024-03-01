@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const plm = require("passport-local-mongoose")
 
 // mongoose.connect("mongodb://localhost:27017/zeroth")
-const atlasConnectionUri = "mongodb+srv://therishuraj:Rishumongo77@cluster0.0juuckz.mongodb.net/zeroth?retryWrites=true&w=majority&appName=Cluster0";
+const atlasConnectionUri = "mongodb+srv://username:password@cluster0.0juuckz.mongodb.net/zeroth?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(atlasConnectionUri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const dbConnection = mongoose.connection;
