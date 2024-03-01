@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+
 router.get('/profile', isLoggedIn, async function(req, res, next) {
   const googleuser = req.user;
   const user = await userModel.findById(req.session.passport.user._id).populate(["ideas", "posts"]);
@@ -67,8 +68,6 @@ router.post('/join', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
-
 
 router.get('/createArticle', (req, res) => {
   res.render('home'); // Assuming you have a template engine (like EJS) for rendering HTML

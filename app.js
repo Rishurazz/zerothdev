@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -11,6 +12,8 @@ var app = express();
 const { connect } = require('http2');
 const expressSession = require('express-session');
 const passport = require('passport');
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,6 +52,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+
+app.listen(3000, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:${3000}`);
 });
 
 module.exports = app;
